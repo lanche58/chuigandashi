@@ -21,10 +21,10 @@
         <a href="index.html" class="logo"><img src="images/logo.jpg" alt=""></a>
         <ul class="nav">
             <li><a href="about.html" data-name="about">关于垂感大师</a></li>
-            <li><a href="pro.html" data-name="pro">产品中心</a></li>
+            <li><a href="pro.html" data-name="pro" class="act">产品中心</a></li>
             <li><a href="join.html">招商加盟</a></li>
             <li><a href="scl.html">商学院</a></li>
-            <li><a href="ser.html" class="act">服务中心</a></li>
+            <li><a href="ser.html">服务中心</a></li>
             <li><a href="#">官方商城</a></li>
         </ul>
     </div>
@@ -146,66 +146,29 @@
 <div class="mtop"></div>
 
 <div class="pbanner jbanner">
-    <div class="pic2"><img src="img/ser_banner.jpg" alt=""></div>
+    <div class="pic2"><img src="img/shop_banner.jpg" alt=""></div>
     <span class="cover"></span>
     <div class="txts">
         <div class="tb">
             <div class="tbc">
                 <div class="bra-ti tac">
-                    <p class="en ttu">Service Centre</p>
-                    <p class="ch">服务中心</p>
+                    <p class="en ttu">retail store</p>
+                    <p class="ch">线下门店查询</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="bread-nav"><div class="pw">你所在的位置：<a href="index.html">网站首页</a>&nbsp;&gt;&nbsp;<a href="ser.html">服务中心</a></div></div>
+    <div class="bread-nav"><div class="pw">你所在的位置：<a href="index.html">网站首页</a>&nbsp;&gt;&nbsp;<a href="pro.html">产品中心</a>&nbsp;&gt;&nbsp;<a href="shop.html">线下门店查询</a></div></div>
 </div>
 
 <div class="container">
-    <div class="ser1">
-        <div class="pw">
-            <div class="bra-ti black tac">
-                <h2 class="en ttu">Customer housekeeper</h2>
-                <h1 class="ch">365管家服务，365天贴心服务</h1>
-                <i class="line"></i>
-                <div class="tx1">佳美嘉垂感大师365管家服务，从加盟店开业前的订单下单、样品搭配、订单跟踪<br>
-到开店后的开业帮扶、物流支持、店内日常管理、活动跟进等一系列服务进行持续跟进</div>
-                <div class="tx2">365天让您全年无忧</div>
-            </div>
-            
+    <div class="shop1 pw">
+        <div class="query-t clearfix">
+            <span class="l">佳美嘉门店信息查询</span>
+            <select class="c-selicts"><option>四川省-成都市-高新区</option></select>
+            <select class="c-selicts"><option>佳美嘉（环球中心店）</option><option>佳美嘉（环球中心店）</option><option>佳美嘉（环球中心店）</option></select>
         </div>
-        <ul class="s-class-list clearfix">
-            <li class="scapic">
-                <div class="pai"><img src="img/ser_i1.jpg" alt=""></div>
-                <div class="txts">
-                    <p class="nowti"><i class="ico" style="background-image: url(img/ser_ico1.png);"></i>售前跟进</p>
-                    <div class="tx">
-                        · 店内日常运营管理咨询<br>· 协助老板进行员工管理<br>· 协助客户进行款式搭配<br>· 活动效果跟进<br>· 疑难事务处理
-                    </div>
-                </div>
-            </li>
-
-            <li class="scapic">
-                <div class="pai"><img src="img/ser_i2.jpg" alt=""></div>
-                <div class="txts">
-                    <p class="nowti"><i class="ico" style="background-image: url(img/ser_ico2.png);"></i>售后服务</p>
-                    <div class="tx">
-                        · 店内日常运营管理咨询<br>· 协助老板进行员工管理<br>· 协助客户进行款式搭配<br>· 活动效果跟进<br>· 疑难事务处理
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="ser2 pw">
-        <div class="bra-ti black tac">
-            <h2 class="en ttu">Team demeanor</h2>
-            <h1 class="ch">团队风采</h1>
-            <ul class="s-team-nav fib">
-                <li class="ib"><a href="ser-ajax.html">设计团队</a></li>
-                <li class="ib"><a href="ser-ajax.html">营销团队</a></li>
-            </ul>
-        </div>
+        <div class="query-map" id="query-map"></div>
     </div>
     
 </div>
@@ -291,33 +254,50 @@
 	</a>
 </div>
 <script src="js/page.js"></script>
-<script>
-    $(function(){
-        getAjaxHtml($('.s-team-nav li').eq(0).find('a'), $('.s-team-nav li').eq(0).find('a').attr('href'));
-        function getAjaxHtml(item,address){
-            $.ajax({
-                url: address,
-                dataType: "html",
-                success: function (data) {
-                    if (data == "" || data == null) {
-                        return;
-                    } else {
-                        if ($('.jo-learn').size() !== 0) { $('.jo-learn').remove(); }
-                        $('.ser2 .bra-ti').after(data);
-                        $('.s-team-nav a').removeClass('act');
-                        item.addClass('act');
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('.jo-learn').remove();
-                }
-            })
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7d3a4c6e5e8a70dd200a2eeacf8c1b50"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css">
+<script>  
+    var k=[[104.070636, 30.675548, "<p class='title'>帝王洁具1（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"],[104.034908, 30.650774, "<p class='title'>帝王洁具（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"],[104.101979, 30.647302, "<p class='title'>帝王洁具2（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"]];
+    var c=[[104.070636, 30.675548, "<p class='title'>帝王洁具（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"],[104.034908, 30.650774, "<p class='title'>帝王洁具（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"],[104.101979, 30.647302, "<p class='title'>帝王洁具（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"],[104.064157, 30.622438, "<p class='title'>帝王洁具（环球中心店）</p>四川成都·高新区环球中心1354号<br/>028-86848888"]];
+    function queryMap(k){
+        map = new BMap.Map("query-map");
+        map.centerAndZoom(new BMap.Point(104.070636, 30.675548), 13);
+        map.disableScrollWheelZoom();
+        map.enableKeyboard();
+        map.enableContinuousZoom();
+        map.enableInertialDragging();
+    //              map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.ScaleControl());
+    //              map.addControl(new BMap.MapTypeControl());
+        map.addControl(new BMap.OverviewMapControl());
+        var data_info = k;
+        var opts = {
+            width: 250,
+            enableMessage: true
+        };
+        for (var i = 0; i < data_info.length; i++) {
+            var marker = new BMap.Marker(new BMap.Point(data_info[i][0], data_info[i][1]))
+            var content = data_info[i][2];
+            map.addOverlay(marker);
+            addClickHandler(content, marker);
         }
-        $(document).on(_click,'.s-team-nav a',function(e){
-            e.preventDefault();
-            var $this = $(this);
-            getAjaxHtml($this, $this.attr('href'));
-        });
+        function addClickHandler(content, marker) {
+            marker.addEventListener("click",
+            function (e) {
+                openInfo(content, e)
+            });
+        };
+        function openInfo(content, e) {
+            var p = e.target;
+            var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+            var infoWindow = new BMap.InfoWindow(content, opts);
+            map.openInfoWindow(infoWindow, point);
+        }
+    }
+    queryMap(k);
+    jQuery(".c-selicts").change(function(){
+        queryMap(c);
     })
 </script>
 </body>
