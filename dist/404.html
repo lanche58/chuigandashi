@@ -167,76 +167,8 @@
 
 <div class="menuBlack"></div>
 <div class="mtop"></div>
-
-<div class="pbg">
-    <div class="n-top pw scroll-animation">
-        <div class="bra-ti black">
-            <p class="en ttu splwo zoomIn">Latest information</p>
-            <p class="ch">最新资讯</p>
-        </div>
-    </div>
-    
-    <div class="page-nav pw clearfix">
-        <div class="pnav l">
-            <p class="mcv">最新公告<i class="sj sj-b"></i></p>
-            <ul>
-                <li><a href="news.html">品牌新闻</a></li>
-                <li><a href="news1.html" class="act">最新公告</a></li>
-                <li><a href="news2.html">行业动态</a></li>
-            </ul>
-        </div>
-        <div class="bread-nav r">你所在的位置：<a href="index.html">网站首页</a>&nbsp;&gt;&nbsp;<a href="about.html">关于垂感大师</a>&nbsp;&gt;&nbsp;<a href="news.html">最新资讯</a>&nbsp;&gt;&nbsp;<a href="news1.html">最新公告</a></div>
-    </div>
-    
-    <div class="container">
-        <div class="nw1 pw">
-            <ul class="n-notice-list">
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-                <li><a href="news-detail.html" class="clearfix">
-                    <p class="nowti"><span class="sj sj-r"></span>佳美嘉关于国庆放假通知公告</p>
-                    <p class="date">2018-09-25</p>
-                </a></li>
-            </ul>
-            <div class="more tac"><a href="#" class="se-more"><p>点击加载更多</p><span class="sj sj-b"></span></a></div>
-        </div>
-        
-    </div>
-    
+<div class="sos-box">
+    <img src="images/404.png" alt="">
 </div>
 <div class="footer">
 	<div class="pw clearfix">
@@ -323,6 +255,78 @@
 		<div class="b"><i class="icon iconfont icon-shang"></i><p>top</p></div>
 	</a>
 </div>
+
 <script src="js/page.js"></script>
+<script>
+    $(function(){
+        getAjaxHtml($('.s-team-nav li').eq(0).find('a'), $('.s-team-nav li').eq(0).find('a').attr('href'));
+        function getAjaxHtml(item,address){
+            $.ajax({
+                url: address,
+                dataType: "html",
+                success: function (data) {
+                    if (data == "" || data == null) {
+                        return;
+                    } else {
+                        if ($('.jo-learn').size() !== 0) { $('.jo-learn').remove(); }
+                        $('.job2 .bra-ti').after(data);
+                        $('.s-team-nav a').removeClass('act');
+                        item.addClass('act');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('.jo-learn').remove();
+                }
+            })
+        }
+        $(document).on(_click,'.s-team-nav a',function(e){
+            e.preventDefault();
+            var $this = $(this);
+            getAjaxHtml($this, $this.attr('href'));
+        });
+
+        $('.pnav a').bind(_click, function(e) {
+            var hash = $(this).attr('href').split('#')[1];
+            if(hash){
+                e.preventDefault();
+                $('html,body').animate({scrollTop: $('#' + hash).offset().top - $mtoph}, 800);
+            }
+        });
+
+        $('.mtnav a').bind(_click, function(e) {
+            var hash = $(this).attr('href').split('#')[1];
+            if(hash){
+                e.preventDefault();
+                var w = $menuBox.width();
+                $('html').removeClass('open');
+                $menuBtn.removeClass('active');
+                $('.menuBlack').stop().fadeOut(600);
+                $menuBox.stop(false,false).animate({right:-w+"px"},function(){
+                    $(this).hide();
+                });
+                navItem = 0;
+                $('html,body').animate({scrollTop: $('#' + hash).offset().top - $mtoph}, 800);
+            }
+        });
+        
+        $('.ju-list .t').bind(_click, function() {
+            var $t = $(this)
+                $b = $(this).siblings('.b')
+                $f = $(this).parent(),
+                $ab = $('.ju-list .b'),
+                $af = $('.ju-list li');
+            if($f.hasClass('act')){
+                $f.removeClass('act');
+                $b.stop(false, false).slideUp(400);
+            }else{
+                $af.removeClass('act');
+                $f.addClass('act');
+                $ab.stop(false, false).slideUp(400);
+                $b.stop(false, false).slideDown(400);
+            }
+        });
+        
+    })
+</script>
 </body>
 </html>
